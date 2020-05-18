@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/css/style.css" >
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid Tracker</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <div id="lasttime"></div>
+       
+ 
+    </div>
+</body>
+<script>
+        var even=0
+        var odd=1
+        
+$.getJSON('https://api.rootnet.in/covid19-in/stats/latest', function(data) {
+    for(i=0;i<34;i++)
+    {
+  
+    $('.container').append('<br><div class="card-deck"> <div class="card"> <img class="card-img-top" src="holder.js/100x180/" alt=""> <div class="card-body"> <h4 class="card-title"><center>'+data.data.regional[even].loc+'</h4> <p class="card-text"><center>Total Confirmed :'+data.data.regional[even].totalConfirmed+'</p><p>Death :'+data.data.regional[even].deaths+'</p><p>Confirmed Forign Case :'+data.data.regional[even].confirmedCasesForeign+'</p><p>Confirmed Indian Case  :'+data.data.regional[even].confirmedCasesIndian+'</p>   </div> </div> <div class="card"> <img class="card-img-top" src="holder.js/100x180/" alt=""> <div class="card-body"> <h4 class="card-title"><center>'+data.data.regional[odd].loc+'</center></h4> <p class="card-text"><center>Total Confirmed :'+data.data.regional[odd].totalConfirmed+'</p> </p><p>Death :'+data.data.regional[odd].deaths+'</p><p>Confirmed Forign Case :'+data.data.regional[odd].confirmedCasesForeign+'</p><p>Confirmed Indian Case  :'+data.data.regional[odd].confirmedCasesIndian+'</p></div> </div> </div>')
+    even=even+2
+    odd=odd+2
+    }
+
+});
+
+
+
+
+
+    </script>
+</html>
