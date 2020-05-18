@@ -9,9 +9,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Covid Tracker</title>
+
 </head>
 <body>
     <div class="container mt-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            
+         
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+               
+           
+                    <input  id='search_item' class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+             
+            </div>
+        </nav>
         <div id="lasttime"></div>
        
  
@@ -20,8 +32,28 @@
 <script>
         var even=0
         var odd=1
+        $("#search_item").keypress(function(e)
+        {
+            var state_search=document.getElementById('search_item').value;
+            if(e.which==13)
+            {
+
+           
+            $.getJSON('https://api.rootnet.in/covid19-in/stats/latest', function(data) {
+                for(i=0;i<34;i++)
+                {
+                   if(data.data.regional[i].loc.toLowerCase()==state_search.toLowerCase())
+                   {
+                      alert(1)
+                   }     
+                }
+              }
+              )
+            }
+
+        })
         
-$.getJSON('https://api.rootnet.in/covid19-in/stats/latest', function(data) {
+        $.getJSON('https://api.rootnet.in/covid19-in/stats/latest', function(data) {
     for(i=0;i<34;i++)
     {
   
