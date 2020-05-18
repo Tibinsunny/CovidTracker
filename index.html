@@ -6,29 +6,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
     <link rel="stylesheet" href="/css/style.css" >
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Covid Tracker</title>
 
 </head>
 <body>
-    <div class="container mt-3">
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            
-         
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-               
-           
-                    <input  id='search_item' class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-             
-            </div>
-        </nav>
-        <div id="lasttime"></div>
-       
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
  
+    
+        <div class="form-inline my-2 my-lg-0">
+            <input id=search_item class="form-control mr-sm-2" type="text" placeholder="Search"><div id=error_msg></div>
+           
+        </form>
     </div>
+</nav>
+<center> <a m3-3 href="https://github.com/tibinsunny" class="fa fa-github" style="font-size:36px" ></a></center> 
+<div class="container">
+
+</div>
 </body>
+
 <script>
         var even=0
         var odd=1
@@ -38,14 +37,15 @@
             if(e.which==13)
             {
 
-           
+                
             $.getJSON('https://api.rootnet.in/covid19-in/stats/latest', function(data) {
                 for(i=0;i<34;i++)
                 {
                    if(data.data.regional[i].loc.toLowerCase()==state_search.toLowerCase())
                    {
-                      alert(1)
-                   }     
+                    $('.container').html('<br><div class="card-deck"> <div class="card"> <img class="card-img-top" src="holder.js/100x180/" alt=""> <div class="card-body"> <h4 class="card-title"><center>'+data.data.regional[i].loc+'</h4> <p class="card-text"><center>Total Confirmed :'+data.data.regional[i].totalConfirmed+'</p><p>Death :'+data.data.regional[i].deaths+'</p><p>Confirmed Forign Case :'+data.data.regional[i].confirmedCasesForeign+'</p><p>Confirmed Indian Case  :'+data.data.regional[i].confirmedCasesIndian+'</p>   </div> </div></div><br><a href="/" ><center>Go Back</center> </a>')
+                   }    
+                   $('#error_msg').html("<font color=red > No Result Found!!! </font>") 
                 }
               }
               )
