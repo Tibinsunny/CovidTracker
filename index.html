@@ -31,9 +31,14 @@
 <script>
         var even=0
         var odd=1
+        var flag=0
+        var load=[]
+        
         $("#search_item").keypress(function(e)
         {
+            
             var state_search=document.getElementById('search_item').value;
+           
             if(e.which==13)
             {
 
@@ -44,8 +49,16 @@
                    if(data.data.regional[i].loc.toLowerCase()==state_search.toLowerCase())
                    {
                     $('.container').html('<br><div class="card-deck"> <div class="card"> <img class="card-img-top" src="holder.js/100x180/" alt=""> <div class="card-body"> <h4 class="card-title"><center>'+data.data.regional[i].loc+'</h4> <p class="card-text"><center>Total Confirmed :'+data.data.regional[i].totalConfirmed+'</p><p>Death :'+data.data.regional[i].deaths+'</p><p>Confirmed Forign Case :'+data.data.regional[i].confirmedCasesForeign+'</p><p>Confirmed Indian Case  :'+data.data.regional[i].confirmedCasesIndian+'</p>   </div> </div></div><br><a href="/" ><center>Go Back</center> </a>')
-                   }    
+                    flag=1
+                   }
+                   if(flag==0)
+                   {    
                    $('#error_msg').html("<font color=red > No Result Found!!! </font>") 
+                }
+                else
+                {
+                    $('#error_msg').html("") 
+                }
                 }
               }
               )
@@ -54,17 +67,23 @@
         })
         
         $.getJSON('https://api.rootnet.in/covid19-in/stats/latest', function(data) {
+           
     for(i=0;i<34;i++)
     {
   
     $('.container').append('<br><div class="card-deck"> <div class="card"> <img class="card-img-top" src="holder.js/100x180/" alt=""> <div class="card-body"> <h4 class="card-title"><center>'+data.data.regional[even].loc+'</h4> <p class="card-text"><center>Total Confirmed :'+data.data.regional[even].totalConfirmed+'</p><p>Death :'+data.data.regional[even].deaths+'</p><p>Confirmed Forign Case :'+data.data.regional[even].confirmedCasesForeign+'</p><p>Confirmed Indian Case  :'+data.data.regional[even].confirmedCasesIndian+'</p>   </div> </div> <div class="card"> <img class="card-img-top" src="holder.js/100x180/" alt=""> <div class="card-body"> <h4 class="card-title"><center>'+data.data.regional[odd].loc+'</center></h4> <p class="card-text"><center>Total Confirmed :'+data.data.regional[odd].totalConfirmed+'</p> </p><p>Death :'+data.data.regional[odd].deaths+'</p><p>Confirmed Forign Case :'+data.data.regional[odd].confirmedCasesForeign+'</p><p>Confirmed Indian Case  :'+data.data.regional[odd].confirmedCasesIndian+'</p></div> </div> </div>')
     even=even+2
     odd=odd+2
+
+
+    
     }
+
+    console.log(i)
 
 });
 
-
+console.log(load) 
 
 
 
